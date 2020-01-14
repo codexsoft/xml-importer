@@ -1,0 +1,25 @@
+{
+    "name": "codexsoft/xml-importer",
+    "license": "MIT",
+    "description": "Simple XML to array importer",
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "require": {
+        "php": "^7.4",
+        "ext-json": "*",
+        "ext-mbstring": "*"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-master"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "": ["tests/unit/"]
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "CodexSoft\\XmlImporter\\": "src/"
+        }
+    }
+}
