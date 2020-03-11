@@ -6,14 +6,32 @@ namespace CodexSoft\XmlImporter;
 
 class XmlImporter
 {
-    public function import(string $filename): array
+
+    /**
+     * @param string $xml
+     *
+     * @return array
+     * @throws \JsonException
+     */
+    public function importFromString(string $xml): array
     {
-        $xmla = simplexml_load_string(\file_get_contents($filename));
-        $json = json_encode($xmla);
-        $array = json_decode($json, true);
+        $xmla = \simplexml_load_string($xml);
+        $json = \json_encode($xmla, JSON_THROW_ON_ERROR);
+        $array = \json_decode($json, true, 512, JSON_THROW_ON_ERROR);
         $array = $this->ensureChildNodesInArrays($array);
         $array = $this->ensureAttributesKeyExists($array);
         return $array;
+    }
+
+    /**
+     * @param string $filename
+     *
+     * @return array
+     * @throws \JsonException
+     */
+    public function import(string $filename): array
+    {
+        return $this->importFromString(\file_get_contents($filename));
     }
 
     private function isArrayAssoc(array $arr): bool
